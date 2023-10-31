@@ -17,12 +17,46 @@ const slides = [
 	}
 ];
 
-console.log (slides);
+function initDots() {
+	const dotsContainer = document.querySelector('.dots');
 
+	// Ajoute les dots en fonction de la taille du tableau slides
+	for (let i = 0; i < slides.length; i++) {
+		const dot = document.createElement('div');
+		dot.classList.add('dot');
+		dotsContainer.appendChild(dot);
+	}
+}
+
+
+let currentSlideIndex = 0;
+
+function updateSlide() {
+	const bannerImg = document.querySelector('.banner-img');
+	const tagline = document.getElementById('tagline');
+
+	bannerImg.src = `./assets/images/slideshow/${slides[currentSlideIndex].image}`;
+	tagline.innerHTML = slides[currentSlideIndex].tagLine;
+
+	// Update dots
+	const dots = document.querySelectorAll('.dot');
+	dots.forEach((dot, index) => {
+		dot.classList.toggle('dot_selected', index === currentSlideIndex);
+	});
+}
+
+// Change the current index to the previous and update slide
 function previous() {
-console.log("click arrow left");
-}
-function next() {
-console.log("click arrow right");
+	currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+	updateSlide();
 }
 
+// Change the current index tp the next and update slide
+function next() {
+	currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+	updateSlide();
+}
+
+// Initial slide update
+initDots();
+updateSlide();
