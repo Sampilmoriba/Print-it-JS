@@ -1,2 +1,1 @@
-# Print-it-JS
-projet 8 , initialisation javascript
+# Print-It WebSite v.1
